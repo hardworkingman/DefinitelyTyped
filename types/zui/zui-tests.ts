@@ -333,3 +333,67 @@ $('#myUploader').uploader({
         console.log('上传成功', file);
     }
 });
+
+/**
+ * treemap
+ */
+$('#myTreemap').treemap();
+$('#treemapExample1').treemap({
+    data: {
+        text: '蔬菜',
+        children: [{
+            html: '<i class="icon icon-heart text-danger"></i> 我的菜',
+            children: [{
+                textColor: 'green',
+                text: '青菜'
+            }, {
+                html: '<span class="text-info">菠菜</span>'
+            }]
+        }, {
+            text: '你的瓜',
+            style: {border: '1px solid green'},
+            collapsed: true,
+            tooltip: '点击展开或折叠',
+            children: ['南瓜', '西瓜', '丝瓜', '苦瓜']
+        }, {
+            text: '甘蓝',
+            children: ['大甘蓝']
+        }, {
+            color: 'orange',
+            textColor: 'white',
+            text: '土豆'
+        }]
+    },
+    'onNodeClick': function(node: NodeObj){
+        console.log('展开');
+    }
+});
+// 简单调用
+$('#myTreemap').treemap('render');
+// 你还可以这样调用
+// 获取组织图实例
+var myTreemap: TreeMap = $('#myTreemap').data('zui.treemap');
+// 调用实例方法
+myTreemap.render();
+
+// 切换折叠或展开根节点
+$('#myTreemap').treemap('toggle');
+
+// 切换折叠或展开指定的节点
+var $node = $('.treemap-node[data="1497683935614002"]');
+$('#myTreemap').treemap('toggle', $node);
+
+// 切换展开根节点
+$('#myTreemap').treemap('toggle', true);
+
+// 切换折叠指定的节点
+var $node = $('.treemap-node[data="1497683935614002"]');
+$('#myTreemap').treemap('toggle', $node, false);
+
+// 在初始化时通过选项监听事件
+$('#myTreemap').treemap({
+    // ...
+    'afterRender': function() {
+        console.log('组织结构图渲染完毕。');
+    }
+});

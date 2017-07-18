@@ -847,3 +847,54 @@ interface Uploader {
 interface JQuery {
   uploader(option: UploaderOption): JQuery;
 }
+
+/**
+ * treemap
+ */
+interface NodeObj {
+  id?: string | number;
+  text?: string;
+  html?: string;
+  children?: NodeObj[];
+  order?: string;
+  style?: object;
+  textColor?: string;
+  color?: string;
+  border?: string;
+  title?: string;
+  tooltip?: string;
+  className?: object;
+}
+
+interface TreeMapOptions {
+  data?: NodeObj | NodeObj[];
+  rowSpace?: number;
+  nodeSpace?: number;
+  foldable?: boolean;
+  clickNodeToFold?: boolean;
+  sort?: boolean;
+  cableWdth?: number;
+  cableColor?: string;
+  cableStyle?: string;
+  listenNodeResize?: boolean;
+  tooltip?: object;
+  nodeStyle?: object;
+  nodeTemplate?: string | CallBack;
+
+  afterRender?(): void;
+  afterDrawLines?(): void;
+  onNodeClick?(node: NodeObj): void;
+}
+
+interface TreeMap {
+  render(data?: NodeObj): void;
+  drawLines(): void;
+  toggle($node?: NodeObj, toggle?: boolean): void;
+}
+
+interface JQuery {
+  treemap(options?: TreeMapOptions): JQuery;
+  treemap(nodeArray?: NodeObj[]): JQuery;
+  treemap(command: string, treeMapDataOrNode?: NodeObj[] | NodeObj, toggle?: boolean): JQuery;
+  data(key: string): TreeMap;
+}
